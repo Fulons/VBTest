@@ -169,6 +169,7 @@ Public Class Calculator
             Case Keys.V
                 btnSqrt_Click(sender, e)
 
+
         End Select
         If e.KeyCode = Keys.NumPad0 Then
             btn0_Click(sender, e)
