@@ -1,4 +1,4 @@
-﻿Imports System
+﻿'Imports System
 Imports System.Math
 Imports System.Windows.Forms
 
@@ -6,6 +6,8 @@ Imports System.Windows.Forms
 Public Class Calculator
     Private operand1 As Double
     Private op As Char
+    Private posX As Integer = 20
+    Private posY As Integer = 20
 
     Private Sub clearTextbox()
         txtOutput.Clear()
@@ -169,10 +171,19 @@ Public Class Calculator
                 btnDecimal_Click(sender, e)
             Case Keys.V
                 btnSqrt_Click(sender, e)
+            Case Keys.Left
+                posX -= 1
+                Me.Invalidate()
+            Case Keys.Right
+                posX += 1
+                Me.Invalidate()
+            Case Keys.Up
+                posY -= 1
+                Me.Invalidate()
+            Case Keys.Down
+                posY += 1
+                Me.Invalidate()
         End Select
-        If e.KeyCode = Keys.NumPad0 Then
-            btn0_Click(sender, e)
-        End If
     End Sub
 
     Private Sub btnEqual_Click(sender As Object, e As EventArgs) Handles btnEqual.Click
@@ -206,5 +217,13 @@ Public Class Calculator
         txtOutput.Text = Math.E
     End Sub
 
+    Private Sub Form1_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles MyBase.Paint
+        Using Brush1 As New SolidBrush(Color.Blue)
+            e.Graphics.FillEllipse(Brush1, posX, posY, 200, 200)
+        End Using
+        Using Pen1 As New Pen(Color.Red, 10)
+            e.Graphics.DrawEllipse(Pen1, posX, posY, 200, 200)
+        End Using
+    End Sub
 
 End Class
