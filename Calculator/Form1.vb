@@ -1,7 +1,5 @@
 ﻿'Imports System
 Imports System.Math
-Imports System.Windows.Forms
-
 
 Public Class Calculator
     Private operand1 As Double
@@ -227,3 +225,95 @@ Public Class Calculator
     End Sub
 
 End Class
+
+Public MustInherit Class Shape
+    Private shapeName As String
+    Public Sub New(ByVal name As String)
+        shapeName = name
+    End Sub
+    Public Sub PrintName()
+        Console.WriteLine(shapeName)
+    End Sub
+
+    Public MustOverride Function GetArea() As Double
+    Public MustOverride Sub Display()
+    Public Overridable Function GetVolume() As Double
+        GetVolume = 0
+    End Function
+End Class
+
+Public Class Cube : Inherits Shape
+    Private height As Double
+    Private width As Double
+    Private depth As Double
+    Public Sub New(ByVal h As Double, ByVal w As Double, ByVal d As Double)
+        MyBase.New("Cube")
+        height = h
+        width = w
+        depth = d
+    End Sub
+
+    Public Overrides Sub Display()
+        PrintName()
+        Console.WriteLine("Height: {0}", height)
+        Console.WriteLine("Width: {0}", width)
+        Console.WriteLine("Depth: {0}", depth)
+        Console.WriteLine("Area: {0}", GetArea())
+        Console.WriteLine("Volume: {0}", GetVolume())
+    End Sub
+
+    Public Overrides Function GetArea() As Double
+        GetArea = height * width * 2 + height * depth * 2 + width * depth * 2
+    End Function
+
+    Public Overrides Function GetVolume() As Double
+        GetVolume = width * height * depth
+    End Function
+
+End Class
+
+Public Class Rectangle : Inherits Shape
+
+    Private height As Double
+    Private width As Double
+    'Private Shared shapeName As String = "Rectangle" 'like static in C
+
+    Public Sub New(ByVal h As Double, ByVal w As Double)
+        MyBase.New("Rectangle")
+        height = h
+        width = w
+    End Sub
+
+    Protected Overrides Sub Finalize()  'Destructor
+
+    End Sub
+
+    Public Sub AcceptDetails()  'Sub does not return any value
+        'height = 4.5
+        'width = 3.5
+    End Sub
+
+    Public Overrides Function GetArea() As Double
+        GetArea = height * width
+    End Function
+
+    Public Overrides Sub Display()
+        PrintName()
+        Console.WriteLine("Height: {0}", height)
+        Console.WriteLine("Width: {0}", width)
+        Console.WriteLine("Area: {0}", GetArea())
+    End Sub
+End Class
+
+Module MainModule
+    Sub Main()
+        Dim r As Shape = New Rectangle(4.5, 3.5)
+        Dim c As Shape = New Cube(2, 3.5, 1)
+
+        r.Display()
+        c.Display()
+
+        Console.WriteLine("Hello World")
+        'Console.ReadKey()
+    End Sub
+End Module
