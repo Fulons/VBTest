@@ -48,6 +48,7 @@ Partial Class Calculator
         Me.btnCos = New System.Windows.Forms.Button()
         Me.btnTan = New System.Windows.Forms.Button()
         Me.btnPi = New System.Windows.Forms.Button()
+        Me.btnE = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'txtOutput
@@ -285,11 +286,22 @@ Partial Class Calculator
         Me.btnPi.Text = "Π"
         Me.btnPi.UseVisualStyleBackColor = True
         '
+        'btnE
+        '
+        Me.btnE.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnE.Location = New System.Drawing.Point(203, 146)
+        Me.btnE.Name = "btnE"
+        Me.btnE.Size = New System.Drawing.Size(30, 30)
+        Me.btnE.TabIndex = 26
+        Me.btnE.Text = "e"
+        Me.btnE.UseVisualStyleBackColor = True
+        '
         'Calculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(304, 360)
+        Me.Controls.Add(Me.btnE)
         Me.Controls.Add(Me.btnPi)
         Me.Controls.Add(Me.btnTan)
         Me.Controls.Add(Me.btnCos)
@@ -349,5 +361,5 @@ Partial Class Calculator
     Friend WithEvents btnCos As System.Windows.Forms.Button
     Friend WithEvents btnTan As System.Windows.Forms.Button
     Friend WithEvents btnPi As System.Windows.Forms.Button
-
+    Friend WithEvents btnE As Button
 End Class
