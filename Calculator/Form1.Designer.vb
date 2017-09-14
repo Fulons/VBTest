@@ -49,6 +49,7 @@ Partial Class Calculator
         Me.btnTan = New System.Windows.Forms.Button()
         Me.btnPi = New System.Windows.Forms.Button()
         Me.btnE = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'txtOutput
@@ -296,11 +297,21 @@ Partial Class Calculator
         Me.btnE.Text = "e"
         Me.btnE.UseVisualStyleBackColor = True
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(239, 127)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(39, 13)
+        Me.Label1.TabIndex = 27
+        Me.Label1.Text = "Label1"
+        '
         'Calculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(304, 360)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnE)
         Me.Controls.Add(Me.btnPi)
         Me.Controls.Add(Me.btnTan)
@@ -362,4 +373,5 @@ Partial Class Calculator
     Friend WithEvents btnTan As System.Windows.Forms.Button
     Friend WithEvents btnPi As System.Windows.Forms.Button
     Friend WithEvents btnE As Button
+    Friend WithEvents Label1 As Label
 End Class

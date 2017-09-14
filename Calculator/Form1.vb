@@ -7,45 +7,55 @@ Public Class Calculator
     Private posX As Integer = 20
     Private posY As Integer = 20
 
+    WithEvents eventPusher As SomeEventPusher
+    Private Sub PushedEventHandler(sender As Object, e As EventArgs) Handles eventPusher.someEvent
+
+    End Sub
+
+    Private Sub Calculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim label As New Label
+        label.Text = "SuperLabel"
+        label.Name = "SuperLabel"
+        label.Size = New Size(MyBase.Size.Width, label.Size.Height)
+        AddHandler label.Click, AddressOf dynamicObjectHandler
+        MyBase.Controls.Add(label)
+        ' For Each txt As TextBox In FindControl https://stackoverflow.com/questions/4673950/loop-over-all-textboxes-in-a-form-including-those-inside-a-groupbox
+    End Sub
+
+    Private Sub dynamicObjectHandler(sender As Object, e As EventArgs)
+        sender.Text += "!"
+    End Sub
+
     Private Sub clearTextbox()
         txtOutput.Clear()
     End Sub
     Private Sub btn1_Click(sender As Object, e As EventArgs) Handles btn1.Click
         txtOutput.Text += "1"
     End Sub
-
     Private Sub btn2_Click(sender As Object, e As EventArgs) Handles btn2.Click
         txtOutput.Text += "2"
     End Sub
-
     Private Sub btn3_Click(sender As Object, e As EventArgs) Handles btn3.Click
         txtOutput.Text += "3"
     End Sub
-
     Private Sub btn4_Click(sender As Object, e As EventArgs) Handles btn4.Click
         txtOutput.Text += "4"
     End Sub
-
     Private Sub btn5_Click(sender As Object, e As EventArgs) Handles btn5.Click
         txtOutput.Text += "5"
     End Sub
-
     Private Sub btn6_Click(sender As Object, e As EventArgs) Handles btn6.Click
         txtOutput.Text += "6"
     End Sub
-
     Private Sub btn7_Click(sender As Object, e As EventArgs) Handles btn7.Click
         txtOutput.Text += "7"
     End Sub
-
     Private Sub btn8_Click(sender As Object, e As EventArgs) Handles btn8.Click
         txtOutput.Text += "8"
     End Sub
-
     Private Sub btn9_Click(sender As Object, e As EventArgs) Handles btn9.Click
         txtOutput.Text += "9"
     End Sub
-
     Private Sub btn0_Click(sender As Object, e As EventArgs) Handles btn0.Click
         txtOutput.Text += "0"
     End Sub
@@ -53,65 +63,55 @@ Public Class Calculator
     Private Sub btnDecimal_Click(sender As Object, e As EventArgs) Handles btnDecimal.Click
         txtOutput.Text += "."
     End Sub
-
     Private Sub btnPluss_Click(sender As Object, e As EventArgs) Handles btnPluss.Click
         op = "+"
         operand1 = txtOutput.Text
         clearTextbox()
     End Sub
-
     Private Sub btnMinus_Click(sender As Object, e As EventArgs) Handles btnMinus.Click
         op = "-"
         operand1 = txtOutput.Text
         clearTextbox()
     End Sub
-
     Private Sub btnMult_Click(sender As Object, e As EventArgs) Handles btnMult.Click
         op = "*"
         operand1 = txtOutput.Text
         clearTextbox()
     End Sub
-
     Private Sub btnDiv_Click(sender As Object, e As EventArgs) Handles btnDiv.Click
         op = "/"
         operand1 = txtOutput.Text
         clearTextbox()
     End Sub
-
     Private Sub btnPow_Click(sender As Object, e As EventArgs) Handles btnPow.Click
         op = "^"
         operand1 = txtOutput.Text
         clearTextbox()
     End Sub
-
     Private Sub btnPowTwo_Click(sender As Object, e As EventArgs) Handles btnPowTwo.Click
         Dim str As String
         str = txtOutput.Text + " ^ 2"
         txtOutput.Text = Pow(txtOutput.Text, 2)
         listCalculations.Items.Add(str + " = " + txtOutput.Text)
     End Sub
-
     Private Sub btnSin_Click(sender As Object, e As EventArgs) Handles btnSin.Click
         Dim str As String
         str = "sin(" + txtOutput.Text + ")"
         txtOutput.Text = Sin(txtOutput.Text)
         listCalculations.Items.Add(str + " = " + txtOutput.Text)
     End Sub
-
     Private Sub btnCos_Click(sender As Object, e As EventArgs) Handles btnCos.Click
         Dim str As String
         str = "cos(" + txtOutput.Text + ")"
         txtOutput.Text = Cos(txtOutput.Text)
         listCalculations.Items.Add(str + " = " + txtOutput.Text)
     End Sub
-
     Private Sub btnTan_Click(sender As Object, e As EventArgs) Handles btnTan.Click
         Dim str As String
         str = "tan(" + txtOutput.Text + ")"
         txtOutput.Text = Tan(txtOutput.Text)
         listCalculations.Items.Add(str + " = " + txtOutput.Text)
     End Sub
-
     Private Sub btnSqrt_Click(sender As Object, e As EventArgs) Handles btnSqrt.Click
         Dim str As String
         str = "v" + txtOutput.Text
@@ -169,18 +169,18 @@ Public Class Calculator
                 btnDecimal_Click(sender, e)
             Case Keys.V
                 btnSqrt_Click(sender, e)
-            Case Keys.Left
-                posX -= 1
-                Me.Invalidate()
-            Case Keys.Right
-                posX += 1
-                Me.Invalidate()
-            Case Keys.Up
-                posY -= 1
-                Me.Invalidate()
-            Case Keys.Down
-                posY += 1
-                Me.Invalidate()
+                'Case Keys.Left
+                '    posX -= 1
+                '    Me.Invalidate()
+                'Case Keys.Right
+                '    posX += 1
+                '    Me.Invalidate()
+                'Case Keys.Up
+                '    posY -= 1
+                '    Me.Invalidate()
+                'Case Keys.Down
+                '    posY += 1
+                '    Me.Invalidate()
         End Select
     End Sub
 
@@ -215,15 +215,19 @@ Public Class Calculator
         txtOutput.Text = Math.E
     End Sub
 
-    Private Sub Form1_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles MyBase.Paint
-        Using Brush1 As New SolidBrush(Color.Blue)
-            e.Graphics.FillEllipse(Brush1, posX, posY, 200, 200)
-        End Using
-        Using Pen1 As New Pen(Color.Red, 10)
-            e.Graphics.DrawEllipse(Pen1, posX, posY, 200, 200)
-        End Using
-    End Sub
+    'Private Sub Form1_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles MyBase.Paint
+    '    Using Brush1 As New SolidBrush(Color.Blue)
+    '        e.Graphics.FillEllipse(Brush1, posX, posY, 200, 200)
+    '    End Using
+    '    Using Pen1 As New Pen(Color.Red, 10)
+    '        e.Graphics.DrawEllipse(Pen1, posX, posY, 200, 200)
+    '    End Using
+    'End Sub
 
+End Class
+
+Public Class SomeEventPusher
+    Event someEvent(sender As Object, e As EventArgs)
 End Class
 
 Public MustInherit Class Shape
